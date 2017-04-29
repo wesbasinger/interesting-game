@@ -153,11 +153,23 @@ def delete_account(user_id, account_id):
 
 def add_cash(user_id, cash_amount):
 
+    transaction = {
+        "timestamp" : time.strftime('%Y-%m-%d %H:%M:%S'),
+        "type" : "Saving Withdrawal",
+        "amount" : cash_amount,
+        "duration" : "NA",
+        "rate" : "NA",
+        "risk" : 0
+    }
+
     users.update(
         {"user_id" : user_id},
         {
             "$inc" : {
                 "cash" : float(cash_amount)
+            },
+            "$push" : {
+                "transactions" : transaction
             }
         }
     )
