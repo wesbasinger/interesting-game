@@ -46,6 +46,15 @@ def index():
                       horse_racing = seed.make_horse_racing(),
                       cash = interface.get_cash(session["user_id"]))
 
+@app.route("/transactions")
+@login_required
+def transactions():
+
+    return render_template(
+        'transactions.html',
+        transactions = interface.get_transactions(session["user_id"])
+    )
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():

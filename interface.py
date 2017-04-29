@@ -48,3 +48,15 @@ def get_cash(user_id):
     else:
 
         return user["cash"]
+
+def get_transactions(user_id):
+
+    user = users.find_one({"user_id" : user_id})
+
+    if not user:
+
+        return []
+
+    else:
+
+        return user["transactions"]
