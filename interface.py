@@ -1,4 +1,5 @@
 import os
+import uuid
 
 mongo_uri = os.environ["MONGO_URI"]
 
@@ -13,9 +14,21 @@ db = client['interesting']
 
 users = db.users
 
-def initialize_user(user_id):
+def get_user(user_id):
 
     user = users.find_one({"user_id" : user_id})
+
+    if not user:
+
+        return None
+
+    else:
+
+        return user
+
+def initialize_user(user_id):
+
+    user = get_user(user_id)
 
     if not user:
 
@@ -39,7 +52,7 @@ def initialize_user(user_id):
 
 def get_cash(user_id):
 
-    user = users.find_one({"user_id" : user_id})
+    user = get_user(user_id)
 
     if not user:
 
@@ -51,7 +64,7 @@ def get_cash(user_id):
 
 def get_transactions(user_id):
 
-    user = users.find_one({"user_id" : user_id})
+    user = get_user(user_id)
 
     if not user:
 
@@ -60,3 +73,43 @@ def get_transactions(user_id):
     else:
 
         return user["transactions"]
+
+def create_savings(user_id, bank, rate, amount):
+
+    if amount > get_cash(user_id):
+
+        return {"error" : True, "message" : "insufficient funds"}
+
+    else:
+
+        account = {
+
+            "account_id" : str(uuid.uuid1()),
+            "deposit_time" : time.strftime('%Y-%m-%d %H:%M:%S'),
+            "bank" : bank,
+            "rate" : float(rate),
+            "amount" : float(amount)
+
+        }
+
+        transaction = {
+            "timestamp" : time.strftime('%Y-%m-%d %H:%M:%S'),
+            "type" : "Saving Deposit",
+            "amount" : amount,
+            "duration" : "N/A",
+            "rate" : rate,
+            "risk" : 0
+        }
+
+        return  db.users.update(
+
+            {"user_id" : user_id},
+            {
+                "$push" : {
+                    "accounts" : account, "transactions" : transaction
+                },
+                "$inc" : {
+                    "cash" : -1 * amount
+                }
+            }
+        )
