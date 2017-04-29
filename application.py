@@ -95,6 +95,31 @@ def mutual_fund():
 
         return redirect(url_for("index"))
 
+@app.route("/money_market", methods=["POST"])
+@login_required
+def money_market():
+
+    name = request.args.get("name")
+    rate = float(request.args.get("rate"))
+    risk = float(request.args.get("risk"))
+    amount = float(request.form.get("amount"))
+
+    if amount < 2000:
+
+        return render_template("error.html", message="Minimum investment is $2000.")
+
+    result = interface.create_money_market(session["user_id"], name, rate, amount, risk)
+
+    try:
+
+        message = result["message"]
+
+        return render_template("error.html", message = message)
+
+    except KeyError:
+
+        return redirect(url_for("index"))
+
 @app.route("/manage", methods=["GET", "POST"])
 @login_required
 def manage():

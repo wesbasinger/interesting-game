@@ -119,6 +119,47 @@ def create_savings(user_id, bank, rate, amount):
             }
         )
 
+def create_money_market(user_id, bank, rate, amount, risk):
+
+    if amount > get_cash(user_id):
+
+        return {"error" : True, "message" : "insufficient funds"}
+
+    else:
+
+        account = {
+
+            "type" : "money market",
+            "account_id" : str(uuid.uuid1()),
+            "deposit_time" : time.strftime('%Y-%m-%d %H:%M:%S'),
+            "bank" : bank,
+            "rate" : float(rate),
+            "amount" : float(amount),
+            "risk" : float(risk)
+        }
+
+        transaction = {
+            "timestamp" : time.strftime('%Y-%m-%d %H:%M:%S'),
+            "type" : "Money Market Deposit",
+            "amount" : amount,
+            "duration" : "NA",
+            "rate" : rate,
+            "risk" : float(risk)
+        }
+
+        return  db.users.update(
+
+            {"user_id" : user_id},
+            {
+                "$push" : {
+                    "accounts" : account, "transactions" : transaction
+                },
+                "$inc" : {
+                    "cash" : -1 * amount
+                }
+            }
+        )
+
 def get_accounts(user_id):
 
     user = get_user(user_id)
