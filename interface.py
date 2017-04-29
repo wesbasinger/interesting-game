@@ -159,7 +159,7 @@ def create_money_market(user_id, bank, rate, amount, risk):
                 }
             }
         )
-        
+
 def create_bond(user_id, name, rate, risk, amount, duration):
 
     if amount > get_cash(user_id):
@@ -235,6 +235,20 @@ def get_accounts(user_id):
             account["maturation_value"] = account["current_value"]
             account["duration"] = "NA"
             account["mature"] = True
+
+        elif account["type"] == "government bond":
+
+            account["maturation_value"] = calculate_compound_interest(account["amount"], account["rate"], account["duration"])
+
+            if hours >= account["duration"]:
+
+                account["mature"] = True
+                account["current_value"] = account["maturation_value"]
+
+            else:
+
+                account["mature"] = False
+                account["current_value"] = "NA"
 
     return accounts
 
