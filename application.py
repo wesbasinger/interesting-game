@@ -5,6 +5,7 @@ from tempfile import gettempdir
 from datetime import datetime
 
 import seed
+import interface
 
 from helpers import *
 
@@ -42,7 +43,8 @@ def index():
                       money_market = seed.make_money_market(),
                       bond = seed.make_bond(),
                       compound_deposit = seed.make_compound_deposit(),
-                      horse_racing = seed.make_horse_racing())
+                      horse_racing = seed.make_horse_racing(),
+                      cash = interface.get_cash(session["user_id"]))
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -75,6 +77,8 @@ def login():
         session["email"] = idinfo["email"]
         session["name"] = idinfo["name"]
         session["picture"] = idinfo["picture"]
+
+        interface.initialize_user(session["user_id"])
 
         return redirect(url_for("index"))
 
