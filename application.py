@@ -138,6 +138,30 @@ def compound_deposit():
 
         return redirect(url_for("index"))
 
+@app.route("/horse_racing", methods=["POST"])
+@login_required
+def horse_racing():
+
+    name = request.args.get("name")
+    rate = float(request.args.get("rate"))
+    risk = float(request.args.get("risk"))
+    amount = float(request.form.get("amount"))
+
+    result = interface.create_horse_racing(session["user_id"], name, rate, risk, amount)
+
+    print result
+
+    try:
+
+        message = result["message"]
+
+        return render_template("error.html", message=message)
+
+    except KeyError:
+
+        return redirect(url_for("index"))
+
+
 
 @app.route("/money_market", methods=["POST"])
 @login_required

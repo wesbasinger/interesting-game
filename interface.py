@@ -295,6 +295,49 @@ def get_accounts(user_id):
 
     return accounts
 
+
+def create_horse_racing(user_id, name, rate, risk, amount):
+
+    if amount > get_cash(user_id):
+
+        return {"error" : True, "message" : "insufficient funds"}
+
+    account = {
+
+        "type" : "horse racing",
+        "account_id" : str(uuid.uuid1()),
+        "deposit_time" : time.strftime('%Y-%m-%d %H:%M:%S'),
+        "bank" : name,
+        "rate" : rate,
+        "amount" : amount,
+        "duration" : "NA",
+        "risk" : risk
+    }
+
+    transaction = {
+        "timestamp" : time.strftime('%Y-%m-%d %H:%M:%S'),
+        "type" : "Horse Racing",
+        "amount" : amount,
+        "duration" : "NA",
+        "rate" : rate,
+        "risk" : risk
+    }
+
+    return  db.users.update(
+
+        {"user_id" : user_id},
+        {
+            "$push" : {
+                "accounts" : account, "transactions" : transaction
+            },
+            "$inc" : {
+                "cash" : -1 * amount
+            }
+        }
+    )
+
+
+
 def delete_account(user_id, account_id):
 
     users.update(
