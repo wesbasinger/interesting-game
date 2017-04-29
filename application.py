@@ -82,12 +82,23 @@ def manage():
 
     if request.method == "GET":
 
-        print interface.get_accounts(session["user_id"])
-
         return render_template("manage.html",
                             accounts=interface.get_accounts(session["user_id"]))
 
+    else:
 
+        account_id = request.args.get("account_id")
+        maturation_value = float(request.args.get("maturation_value"))
+        mature = request.args.get("mature")
+        risk = request.args.get("risk")
+
+        if bool(mature):
+
+            interface.add_cash(session["user_id"], maturation_value)
+
+            interface.delete_account(session["user_id"], account_id)
+
+            return redirect(url_for("index"))
 
 
 @app.route("/login", methods=["GET", "POST"])

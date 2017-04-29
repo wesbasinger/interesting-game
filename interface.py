@@ -65,6 +65,7 @@ def get_cash(user_id):
 
         return user["cash"]
 
+
 def get_transactions(user_id):
 
     user = get_user(user_id)
@@ -138,3 +139,25 @@ def get_accounts(user_id):
             account["risk"] = 0
 
     return accounts
+
+def delete_account(user_id, account_id):
+
+    users.update(
+        {"user_id" : user_id},
+        {
+            "$pull" : {
+                "accounts" : {"account_id" : account_id}
+            }
+        }
+    )
+
+def add_cash(user_id, cash_amount):
+
+    users.update(
+        {"user_id" : user_id},
+        {
+            "$inc" : {
+                "cash" : float(cash_amount)
+            }
+        }
+    )
