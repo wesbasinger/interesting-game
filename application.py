@@ -34,6 +34,8 @@ Session(app)
 @login_required
 def index():
 
+    print(session)
+
     return render_template('index.html')
 
 
@@ -64,14 +66,17 @@ def login():
 
         #userid = idinfo['sub']
 
+        # remember which user has logged in
+        session["user_id"] = idinfo["sub"]
+
         print(idinfo)
 
         return redirect(url_for("index"))
 
-    # else if user reached route via GET (as by clicking a link or via redirect)
-    else:
 
-        return render_template("login.html")
+
+    return render_template("login.html")
+
 
 @app.route("/logout")
 def logout():

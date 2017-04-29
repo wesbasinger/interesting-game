@@ -9,15 +9,8 @@
     <meta name="google-signin-client_id" content="1024412823571-9489vhkoanksm77ntqsste037572j8o2.apps.googleusercontent.com">
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
-    <a href="#" onclick="signOut();">Sign out</a>
-<script>
-  function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
-    });
-  }
-</script>
+
+
 
     <script>
     function onSignIn(googleUser) {
@@ -26,7 +19,7 @@
       xhr.open('POST', '/login');
       xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
       xhr.onload = function() {
-        console.log('Signed in as: ' + xhr.responseText);
+        window.location.href = "/";
       };
       xhr.send('idtoken=' + id_token);
     }

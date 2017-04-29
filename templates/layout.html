@@ -16,11 +16,34 @@
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <meta name="google-signin-client_id" content="1024412823571-9489vhkoanksm77ntqsste037572j8o2.apps.googleusercontent.com">
+
         <title>The Interesting Game: {% block title %}{% endblock %}</title>
 
     </head>
 
     <body>
+
+        <script>
+          function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+              var xhr = new XMLHttpRequest();
+              xhr.open('GET', '/logout');
+              xhr.onload = function() {
+                window.location.href = "/login";
+              };
+              xhr.send();
+            });
+          }
+
+          function onLoad() {
+            gapi.load('auth2', function() {
+              gapi.auth2.init();
+            });
+          }
+        </script>
 
         <div class="container">
 
@@ -43,8 +66,9 @@
                                 <li><a href="#">How to Get Started</a></li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+                                <li><button onclick="signOut();">Sign out</button></li>
                             </ul>
+                            <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
                         {% else %}
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="{{ url_for('logout') }}">Log In</a></li>
