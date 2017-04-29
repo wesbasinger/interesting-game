@@ -5,7 +5,9 @@
 {% endblock %}
 
 {% block main %}
+  <div class="jumbotron">
   <h1>Transaction History</h1>
+</div>
 
   <table class="table table-striped">
     <thead>
@@ -22,7 +24,7 @@
       {% for transaction in transactions %}
         <tr>
           <td>{{transaction["timestamp"]}}</td>
-          <td>{{transaction["type"]}}</td>
+          <td>{{transaction["type"] | title }}</td>
           <td>{{transaction["amount"] | usd }}</td>
           <td>{{transaction["duration"]}}</td>
           <td>{{transaction["rate"] | percent}}</td>

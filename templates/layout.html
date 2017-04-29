@@ -68,12 +68,12 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li>{{ session["name"] }}</li>
                                 <li><img src="{{ session['picture']}}" height="40px"/>
-                                <li><button onclick="signOut();">Sign out</button></li>
+                                <li><button onclick="signOut();" class="btn btn-info" role="button">Sign out</button></li>
                             </ul>
                             <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
                         {% else %}
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a href="{{ url_for('logout') }}">Log In</a></li>
+                                <li><a href="{{ url_for('logout') }}" class="btn btn-info" role="button">Log In</a></li>
                             </ul>
                         {% endif %}
                     </div>

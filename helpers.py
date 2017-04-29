@@ -4,6 +4,7 @@ from functools import wraps
 from yahoo_finance import Share
 
 import datetime
+import dateutil
 
 def login_required(f):
     """
@@ -20,11 +21,17 @@ def login_required(f):
 
 def usd(value):
     """Formats value as USD."""
-    return "${:,.2f}".format(value)
+    try:
+        return "${:,.2f}".format(value)
+    except ValueError:
+        return value
 
 def percent(value):
     """Formats value as percent."""
-    return "{:,.3f}%".format(value)
+    try:
+        return "{:,.3f}%".format(float(value))
+    except ValueError:
+        return value
 
 def get_stock_index():
 

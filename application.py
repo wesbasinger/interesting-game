@@ -196,7 +196,8 @@ def manage():
     if request.method == "GET":
 
         return render_template("manage.html",
-                            accounts=interface.get_accounts(session["user_id"]))
+                            accounts=interface.get_accounts(session["user_id"]),
+                            cash=interface.get_cash(session["user_id"]))
 
     else:
 
