@@ -165,13 +165,17 @@ def manage():
 
             return render_template("crash.html", message="Money market account crashed.")
 
-        if bool(mature):
+        if mature == "True":
 
             interface.add_cash(session["user_id"], maturation_value)
 
             interface.delete_account(session["user_id"], account_id)
 
             return redirect(url_for("index"))
+
+        else:
+
+            return render_template("error.html", message="Fund is not mature.")
 
 
 @app.route("/login", methods=["GET", "POST"])
