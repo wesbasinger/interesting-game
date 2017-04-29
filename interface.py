@@ -202,6 +202,48 @@ def create_bond(user_id, name, rate, risk, amount, duration):
             }
         )
 
+def create_compound_deposit(user_id, name, rate, amount, duration):
+
+    if amount > get_cash(user_id):
+
+        return {"error" : True, "message" : "insufficient funds"}
+
+    else:
+
+        account = {
+
+            "type" : "compound deposit",
+            "account_id" : str(uuid.uuid1()),
+            "deposit_time" : time.strftime('%Y-%m-%d %H:%M:%S'),
+            "bank" : name,
+            "rate" : rate,
+            "amount" : amount,
+            "duration" : duration
+        }
+
+        transaction = {
+            "timestamp" : time.strftime('%Y-%m-%d %H:%M:%S'),
+            "type" : "Compound Deposit",
+            "amount" : amount,
+            "duration" : duration,
+            "rate" : rate,
+            "risk" : 0
+        }
+
+        return  db.users.update(
+
+            {"user_id" : user_id},
+            {
+                "$push" : {
+                    "accounts" : account, "transactions" : transaction
+                },
+                "$inc" : {
+                    "cash" : -1 * amount
+                }
+            }
+        )
+
+
 def get_accounts(user_id):
 
     user = get_user(user_id)

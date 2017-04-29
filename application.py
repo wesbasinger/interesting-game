@@ -117,6 +117,27 @@ def bond():
 
         return redirect(url_for("index"))
 
+@app.route("/compound_deposit", methods=["POST"])
+@login_required
+def compound_deposit():
+
+    name = request.args.get("name")
+    rate = float(request.args.get("rate"))
+    amount = int(request.args.get("amount"))
+    duration = int(request.args.get("duration"))
+
+    result = interface.create_compound_deposit(session["user_id"], name, rate, amount, duration)
+
+    try:
+
+        message = result["message"]
+
+        return render_template("error.html", message=message)
+
+    except KeyError:
+
+        return redirect(url_for("index"))
+
 
 @app.route("/money_market", methods=["POST"])
 @login_required
