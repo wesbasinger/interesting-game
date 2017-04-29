@@ -22,6 +22,10 @@ def usd(value):
     """Formats value as USD."""
     return "${:,.2f}".format(value)
 
+def percent(value):
+    """Formats value as percent."""
+    return "{:,.3f}%".format(value)
+
 def get_stock_index():
 
     yahoo = Share("^GSPC")

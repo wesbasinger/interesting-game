@@ -7,82 +7,93 @@
 {% block main %}
   <h1>Investment Options</h1>
 
-  <h2>Available Cash: {{cash}}</h2>
+  <h2>Available Cash: {{cash | usd }}</h2>
 
-  <table>
-    <tr>
-      <td>
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="well">
         <form action="/savings?name={{savings['name']}}&rate={{savings['rate']}}" method="POST">
           <p>Type: Savings</p>
           <p>Bank: {{savings["name"]}}</p>
-          <p>Rate: {{savings["rate"]}}</p>
+          <p>Rate: {{savings["rate"] | percent}}</p>
           <p>Risk: Very Low </p>
           <p>Minimum: None</p>
           <p>Duration: Not Fixed</p>
           <input type="number" name="amount" required="true" placeholder="Amount to place in savings"/>
           <input type="submit" value="Submit">
         </form>
-      </td>
-      <td>
+      </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="well">
         <form action="/mutual_fund?name={{mutual_fund['name']}}&price={{mutual_fund['price']}}" method="POST">
           <p>Type: Mutual Fund</p>
           <p>Manager: {{mutual_fund["name"]}}</p>
-          <p>Share Price: {{mutual_fund["price"]}}</p>
+          <p>Share Price: {{mutual_fund["price"] | usd }}</p>
           <p>Risk: Medium </p>
           <p>Minimum: None</p>
           <p>Duration: Not Fixed</p>
           <input type="number" name="shares" required="true" placeholder="Number of shares to buy"/>
           <input type="submit" value="Submit">
         </form>
-      </td>
-      <td>
+      </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="well">
         <form action="/money_market?name={{money_market['name']}}&rate={{money_market['rate']}}&risk={{money_market['risk']}}" method="POST">
           <p>Type: Money Market</p>
           <p>Bank: {{money_market["name"]}}</p>
-          <p>Rate: {{money_market["rate"]}}</p>
+          <p>Rate: {{money_market["rate"] | percent}}</p>
           <p>Risk: Low </p>
           <p>Minimum: $2000</p>
           <p>Duration: Not Fixed</p>
           <input type="number" name="amount" required="true" placeholder="Amount to place in money market"/>
           <input type="submit" value="Submit">
         </form>
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="well">
         <form action="/bond?name={{bond['name']}}&rate={{bond['rate']}}&risk={{bond['risk']}}&amount={{bond['amount']}}&duration={{bond['duration']}}" method="POST">
           <p>Type: Government Bond</p>
           <p>Issuer: {{bond["name"]}}</p>
-          <p>Rate: {{bond["rate"]}}</p>
+          <p>Rate: {{bond["rate"] | percent}}</p>
           <p>Risk: Low </p>
-          <p>Amount: {{bond["amount"]}}</p>
+          <p>Amount: {{bond["amount"] | usd }}</p>
           <p>Duration: {{bond["duration"]}} years</p>
           <input type="submit" value="Submit">
         </form>
-      </td>
-      <td>
+      </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="well">
         <form action="/compound_deposit?name={{compound_deposit['name']}}&rate={{compound_deposit['rate']}}&amount={{compound_deposit['amount']}}&duration={{compound_deposit['duration']}}&risk={{compound_deposit['risk']}}" method="POST">
           <p>Type: Compound Deposit</p>
           <p>Issuer: {{compound_deposit["name"]}}</p>
-          <p>Rate: {{compound_deposit["rate"]}}</p>
+          <p>Rate: {{compound_deposit["rate"] | percent}}</p>
           <p>Risk: Very Low </p>
-          <p>Amount: {{compound_deposit["amount"]}}</p>
+          <p>Amount: {{compound_deposit["amount"] | usd }}</p>
           <p>Duration: {{compound_deposit["duration"]}} years</p>
           <input type="submit" value="Submit">
         </form>
-      </td>
-      <td>
+      </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="well">
         <form action="/horse_racing?name={{horse_racing['name']}}&rate={{horse_racing['rate']}}&risk={{horse_racing['risk']}}" method="POST">
           <p>Type: Illicit</p>
           <p>Activity: {{horse_racing["name"]}}</p>
-          <p>Rate: {{horse_racing["rate"]}}</p>
+          <p>Rate: {{horse_racing["rate"] | percent}}</p>
           <p>Risk: Very High </p>
           <p>Minimum: None</p>
           <p>Duration: Not Fixed</p>
           <input type="number" name="amount" required="true" placeholder="Amount to gamble away"/>
           <input type="submit" value="Submit">
         </form>
-      </td>
-    </tr>
-  </table>
+      </div>
+      </div>
+    </div>
+
 {% endblock %}

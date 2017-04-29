@@ -25,6 +25,7 @@ if app.config["DEBUG"]:
 
 # custom filter
 app.jinja_env.filters["usd"] = usd
+app.jinja_env.filters["percent"] = percent
 
 
 # configure session to use filesystem (instead of signed cookies)

@@ -7,9 +7,9 @@
 {% block main %}
   <h1>Manage Accounts</h1>
 
-  <h2>Available Cash: {{cash}}</h2>
+  <h2>Available Cash: {{cash | usd}}</h2>
 
-  <table>
+  <table class="table table-striped">
     <thead>
       <tr>
         <td>Deposit Time</td>
@@ -30,12 +30,12 @@
           <td>{{account["deposit_time"]}}</td>
           <td>{{account["type"]}}</td>
           <td>{{account["bank"]}}</td>
-          <td>{{account["current_value"]}}</td>
-          <td>{{account["maturation_value"]}}</td>
+          <td>{{account["current_value"] | usd }}</td>
+          <td>{{account["maturation_value"] | usd }}</td>
           <td>{{account["duration"]}}</td>
-          <td>{{account["rate"]}}</td>
+          <td>{{account["rate"] | percent}}</td>
+          <td>{{account["risk"] | percent}}</td>
           <td>{{account["mature"]}}</td>
-          <td>{{account["risk"]}}</td>
           <td>
             <form action="/manage?account_id={{account['account_id']}}&maturation_value={{account['maturation_value']}}&mature={{account['mature']}}&risk={{account['risk']}}" method="POST">
               <input type="submit" value="Liquidate" />
