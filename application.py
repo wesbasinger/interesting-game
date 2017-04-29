@@ -55,6 +55,28 @@ def transactions():
         transactions = interface.get_transactions(session["user_id"])
     )
 
+@app.route("/savings", methods=["POST"])
+@login_required
+def savings():
+
+    name = request.args.get("name")
+    rate = float(request.args.get("rate"))
+    amount = float(request.form.get("amount"))
+
+    result = interface.create_savings(session["user_id"], name, rate, amount)
+
+    try:
+
+        print result
+
+        message = result["message"]
+
+        return render_template("error.html", message = message)
+
+    except KeyError:
+
+        return redirect(url_for("index"))
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
