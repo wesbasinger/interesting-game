@@ -95,6 +95,29 @@ def mutual_fund():
 
         return redirect(url_for("index"))
 
+@app.route("/bond", methods=["POST"])
+@login_required
+def bond():
+
+    name = request.args.get("name")
+    rate = float(request.args.get("rate"))
+    risk = float(request.args.get("risk"))
+    amount = int(request.args.get("amount"))
+    duration = int(request.args.get("duration"))
+
+    result = interface.create_bond(session["user_id"], name, rate, risk, amount, duration)
+
+    try:
+
+        message = result["message"]
+
+        return render_template("error.html", message=message)
+
+    except KeyError:
+
+        return redirect(url_for("index"))
+
+
 @app.route("/money_market", methods=["POST"])
 @login_required
 def money_market():

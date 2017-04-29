@@ -159,6 +159,48 @@ def create_money_market(user_id, bank, rate, amount, risk):
                 }
             }
         )
+        
+def create_bond(user_id, name, rate, risk, amount, duration):
+
+    if amount > get_cash(user_id):
+
+        return {"error" : True, "message" : "insufficient funds"}
+
+    else:
+
+        account = {
+
+            "type" : "government bond",
+            "account_id" : str(uuid.uuid1()),
+            "deposit_time" : time.strftime('%Y-%m-%d %H:%M:%S'),
+            "bank" : name,
+            "rate" : rate,
+            "amount" : amount,
+            "risk" : risk,
+            "duration" : duration
+        }
+
+        transaction = {
+            "timestamp" : time.strftime('%Y-%m-%d %H:%M:%S'),
+            "type" : "Government Bond Purchase",
+            "amount" : amount,
+            "duration" : duration,
+            "rate" : rate,
+            "risk" : risk
+        }
+
+        return  db.users.update(
+
+            {"user_id" : user_id},
+            {
+                "$push" : {
+                    "accounts" : account, "transactions" : transaction
+                },
+                "$inc" : {
+                    "cash" : -1 * amount
+                }
+            }
+        )
 
 def get_accounts(user_id):
 
