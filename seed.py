@@ -182,6 +182,6 @@ def make_horse_racing():
 
         result["rate"] = rand * 100
 
-    result["risk"] = 0.90
+    result["risk"] = rand * .9
 
     return result
