@@ -38,7 +38,9 @@ def index():
 
     return render_template(
         'index.html', savings = seed.make_savings(),
-                      mutual_fund = seed.make_mutual_fund())
+                      mutual_fund = seed.make_mutual_fund(),
+                      money_market = seed.make_money_market(),
+                      bond = seed.make_bond())
 
 
 @app.route("/login", methods=["GET", "POST"])
