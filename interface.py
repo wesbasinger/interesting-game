@@ -173,3 +173,42 @@ def add_cash(user_id, cash_amount):
             }
         }
     )
+
+def create_mutual_fund(user_id, name, price, shares):
+
+    if price * shares > get_cash(user_id):
+
+        return {"error" : True, "message" : "insufficient funds"}
+
+    account = {
+
+        "type" : "mutual fund",
+        "account_id" : str(uuid.uuid1()),
+        "deposit_time" : time.strftime('%Y-%m-%d %H:%M:%S'),
+        "bank" : name,
+        "rate" : "NA",
+        "amount" : shares
+
+    }
+
+    transaction = {
+        "timestamp" : time.strftime('%Y-%m-%d %H:%M:%S'),
+        "type" : "Mutual Fund Purchase",
+        "amount" : price * shares,
+        "duration" : "NA",
+        "rate" : price,
+        "risk" : 0
+    }
+
+    return  db.users.update(
+
+        {"user_id" : user_id},
+        {
+            "$push" : {
+                "accounts" : account, "transactions" : transaction
+            },
+            "$inc" : {
+                "cash" : -1 * price * shares
+            }
+        }
+    )

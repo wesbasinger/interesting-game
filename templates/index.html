@@ -27,11 +27,11 @@
         <form action="/mutual_fund?name={{mutual_fund['name']}}&price={{mutual_fund['price']}}" method="POST">
           <p>Type: Mutual Fund</p>
           <p>Manager: {{mutual_fund["name"]}}</p>
-          <p>Index: {{mutual_fund["price"]}}</p>
-          <p>Risk: Low </p>
+          <p>Share Price: {{mutual_fund["price"]}}</p>
+          <p>Risk: Medium </p>
           <p>Minimum: None</p>
           <p>Duration: Not Fixed</p>
-          <input type="number" name="amount" required="true" placeholder="Amount to buy shares"/>
+          <input type="number" name="shares" required="true" placeholder="Number of shares to buy"/>
           <input type="submit" value="Submit">
         </form>
       </td>

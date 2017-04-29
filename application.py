@@ -75,6 +75,25 @@ def savings():
 
         return redirect(url_for("index"))
 
+@app.route("/mutual_fund", methods=["POST"])
+@login_required
+def mutual_fund():
+
+    name = request.args.get("name")
+    price = float(request.args.get("price"))
+    shares = int(request.form.get("shares"))
+
+    result = interface.create_mutual_fund(session["user_id"], name, price, shares)
+
+    try:
+
+        message = result["message"]
+
+        return render_template("error.html", message=message)
+
+    except KeyError:
+
+        return redirect(url_for("index"))
 
 @app.route("/manage", methods=["GET", "POST"])
 @login_required
