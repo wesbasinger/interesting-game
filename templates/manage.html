@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Manage Accounts
+{% endblock %}
+
+{% block main %}
+  <h1>Manage Accounts</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <td>Deposit Time</td>
+        <td>Type</td>
+        <td>Institution</td>
+        <td>Current Value</td>
+        <td>Maturation Value</td>
+        <td>Duration</td>
+        <td>Rate</td>
+        <td>Mature</td>
+        <td>Risk</td>
+        <td>Cash Out</td>
+      <tr>
+    </thead>
+    <tbody>
+      {% for account in accounts %}
+        <tr>
+          <td>{{account["deposit_time"]}}</td>
+          <td>{{account["type"]}}</td>
+          <td>{{account["bank"]}}</td>
+          <td>{{account["current_value"]}}</td>
+          <td>{{account["maturation_value"]}}</td>
+          <td>{{account["duration"]}}</td>
+          <td>{{account["rate"]}}</td>
+          <td>{{account["mature"]}}</td>
+          <td>{{account["risk"]}}</td>
+          <td>
+            <form action="/manage?account_id={{account['account_id']}}&maturation_value={{account['maturation_value']}}&mature={{account['mature']}}&risk={{account['risk']}}" method="POST">
+              <input type="submit" value="Liquidate" />
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

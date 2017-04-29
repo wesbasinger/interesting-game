@@ -32,12 +32,12 @@ def calculate_compound_interest(principal, rate, time):
 
     return principal * (1 + rate / 100.00) ** time
 
-def elapsed_hours(first_timestamp, second_timestamp):
+def elapsed_hours(previous_timestamp):
 
-    first_timestamp = datetime.datetime.strptime(first_timestamp, '%Y-%m-%d %H:%M:%S')
+    previous = datetime.datetime.strptime(previous_timestamp, '%Y-%m-%d %H:%M:%S')
 
-    second_timestamp = datetime.datetime.strptime(second_timestamp, '%Y-%m-%d %H:%M:%S')
+    now = datetime.datetime.now()
 
-    td = second_timestamp - first_timestamp
+    td = now - previous
 
-    return td.seconds / 3600
+    return td.total_seconds() / 3600

@@ -7,6 +7,9 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 
 import time
+import datetime
+
+from helpers import *
 
 client = MongoClient(mongo_uri)
 
@@ -41,9 +44,9 @@ def initialize_user(user_id):
                     "timestamp" : time.strftime('%Y-%m-%d %H:%M:%S'),
                     "type" : "Initial Deposit",
                     "amount" : 10000,
-                    "rate" : "N/A",
-                    "duration" : "N/A",
-                    "risk" : "N/A"
+                    "rate" : "NA",
+                    "duration" : "NA",
+                    "risk" : "NA"
                 }
             ]
         }
@@ -84,6 +87,7 @@ def create_savings(user_id, bank, rate, amount):
 
         account = {
 
+            "type" : "savings",
             "account_id" : str(uuid.uuid1()),
             "deposit_time" : time.strftime('%Y-%m-%d %H:%M:%S'),
             "bank" : bank,
@@ -96,7 +100,7 @@ def create_savings(user_id, bank, rate, amount):
             "timestamp" : time.strftime('%Y-%m-%d %H:%M:%S'),
             "type" : "Saving Deposit",
             "amount" : amount,
-            "duration" : "N/A",
+            "duration" : "NA",
             "rate" : rate,
             "risk" : 0
         }
@@ -113,3 +117,24 @@ def create_savings(user_id, bank, rate, amount):
                 }
             }
         )
+
+def get_accounts(user_id):
+
+    user = get_user(user_id)
+
+    accounts = user["accounts"]
+
+    for account in accounts:
+
+        hours = elapsed_hours(account["deposit_time"])
+
+        if account["type"] == "savings":
+
+            # set additional needed value for display in account manager
+            account["current_value"] = calculate_compound_interest(account["amount"], account["rate"], hours)
+            account["maturation_value"] = account["current_value"]
+            account["duration"] = "NA"
+            account["mature"] = True
+            account["risk"] = 0
+
+    return accounts

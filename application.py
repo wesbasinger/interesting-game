@@ -67,8 +67,6 @@ def savings():
 
     try:
 
-        print result
-
         message = result["message"]
 
         return render_template("error.html", message = message)
@@ -76,6 +74,20 @@ def savings():
     except KeyError:
 
         return redirect(url_for("index"))
+
+
+@app.route("/manage", methods=["GET", "POST"])
+@login_required
+def manage():
+
+    if request.method == "GET":
+
+        print interface.get_accounts(session["user_id"])
+
+        return render_template("manage.html",
+                            accounts=interface.get_accounts(session["user_id"]))
+
+
 
 
 @app.route("/login", methods=["GET", "POST"])
