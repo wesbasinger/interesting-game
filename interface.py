@@ -218,7 +218,8 @@ def create_compound_deposit(user_id, name, rate, amount, duration):
             "bank" : name,
             "rate" : rate,
             "amount" : amount,
-            "duration" : duration
+            "duration" : duration,
+            "risk" : 0
         }
 
         transaction = {
@@ -278,7 +279,7 @@ def get_accounts(user_id):
             account["duration"] = "NA"
             account["mature"] = True
 
-        elif account["type"] == "government bond":
+        elif account["type"] == "government bond" or account["type"] == "compound deposit":
 
             account["maturation_value"] = calculate_compound_interest(account["amount"], account["rate"], account["duration"])
 
