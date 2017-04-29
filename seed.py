@@ -1,5 +1,7 @@
 import random
 
+from helpers import get_stock_index
+
 def make_savings():
 
     names = [
@@ -27,5 +29,24 @@ def make_savings():
     else:
 
         result["rate"] = rand
+
+    return result
+
+def make_mutual_fund():
+
+    names = [
+        "Edward Jones",
+        "Vanguard",
+        "Fidelity",
+        "Continental",
+        "Jim Rivers",
+        "Hank Williams"
+    ]
+
+    result = {
+        "name" : random.choice(names)
+    }
+
+    result["price"] = get_stock_index()
 
     return result

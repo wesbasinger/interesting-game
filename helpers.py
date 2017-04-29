@@ -1,6 +1,8 @@
 from flask import redirect, render_template, request, session, url_for
 from functools import wraps
 
+from yahoo_finance import Share
+
 def login_required(f):
     """
     Decorate routes to require login.
@@ -17,3 +19,9 @@ def login_required(f):
 def usd(value):
     """Formats value as USD."""
     return "${:,.2f}".format(value)
+
+def get_stock_index():
+
+    yahoo = Share("^GSPC")
+
+    return float(yahoo.get_price())

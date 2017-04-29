@@ -37,7 +37,8 @@ Session(app)
 def index():
 
     return render_template(
-        'index.html', savings = seed.make_savings())
+        'index.html', savings = seed.make_savings(),
+                      mutual_fund = seed.make_mutual_fund())
 
 
 @app.route("/login", methods=["GET", "POST"])
