@@ -118,3 +118,38 @@ def make_bond():
     result["amount"] = random.choice([100, 500, 1000, 2000, 5000, 10000])
 
     return result
+
+def make_compound_deposit():
+
+    names = [
+        "Edward Jones",
+        "Vanguard",
+        "Fidelity",
+        "Continental",
+        "Jim Rivers",
+        "Hank Williams"
+    ]
+
+    result = {
+        "name" : random.choice(names)
+    }
+
+    rand = random.random()
+
+    if rand < 0.75:
+
+        result["rate"] = rand
+
+    elif rand < 0.90:
+
+        result["rate"] = rand * 1.25
+
+    else:
+
+        result["rate"] = rand * 1.5
+
+    result["duration"] = random.choice([5, 10, 15, 20, 50, 100])
+
+    result["amount"] = random.choice([100, 500, 1000, 2000, 5000, 10000])
+
+    return result

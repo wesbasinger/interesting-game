@@ -47,6 +47,8 @@
           <input type="submit" value="Submit">
         </form>
       </td>
+    </tr>
+    <tr>
       <td>
         <form action="/bond?name={{bond['name']}}&rate={{bond['rate']}}&risk={{bond['risk']}}&amount={{bond['amount']}}&duration={{bond['duration']}}" method="POST">
           <p>Type: Government Bond</p>
@@ -55,7 +57,17 @@
           <p>Risk: Low </p>
           <p>Amount: {{bond["amount"]}}</p>
           <p>Duration: {{bond["duration"]}} years</p>
-          <input type="number" required="true" placeholder="Amount to place in money market"/>
+          <input type="submit" value="Submit">
+        </form>
+      </td>
+      <td>
+        <form action="/compound_deposit?name={{compound_deposit['name']}}&rate={{compound_deposit['rate']}}&amount={{compound_deposit['amount']}}&duration={{compound_deposit['duration']}}" method="POST">
+          <p>Type: Compound Deposit</p>
+          <p>Issuer: {{compound_deposit["name"]}}</p>
+          <p>Rate: {{compound_deposit["rate"]}}</p>
+          <p>Risk: Very Low </p>
+          <p>Amount: {{compound_deposit["amount"]}}</p>
+          <p>Duration: {{compound_deposit["duration"]}} years</p>
           <input type="submit" value="Submit">
         </form>
       </td>
