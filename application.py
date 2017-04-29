@@ -134,7 +134,13 @@ def manage():
         account_id = request.args.get("account_id")
         maturation_value = float(request.args.get("maturation_value"))
         mature = request.args.get("mature")
-        risk = request.args.get("risk")
+        risk = float(request.args.get("risk"))
+
+        if risk > 0.5:
+
+            interface.delete_account(session["user_id"], account_id)
+
+            return render_template("crash.html", message="Money market account crashed.")
 
         if bool(mature):
 
