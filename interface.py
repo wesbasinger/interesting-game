@@ -138,6 +138,14 @@ def get_accounts(user_id):
             account["mature"] = True
             account["risk"] = 0
 
+        elif account["type"] == "mutual fund":
+
+            account["current_value"] = account["amount"] * get_stock_index()
+            account["maturation_value"] = account["current_value"]
+            account["duration"] = "NA"
+            account["mature"] = True
+            account["risk"] = 0
+
     return accounts
 
 def delete_account(user_id, account_id):
@@ -155,7 +163,7 @@ def add_cash(user_id, cash_amount):
 
     transaction = {
         "timestamp" : time.strftime('%Y-%m-%d %H:%M:%S'),
-        "type" : "Saving Withdrawal",
+        "type" : "Withdrawal",
         "amount" : cash_amount,
         "duration" : "NA",
         "rate" : "NA",
