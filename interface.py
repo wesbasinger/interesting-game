@@ -187,6 +187,13 @@ def get_accounts(user_id):
             account["mature"] = True
             account["risk"] = 0
 
+        elif account["type"] == "money market":
+
+            account["current_value"] = calculate_compound_interest(account["amount"], account["rate"], hours)
+            account["maturation_value"] = account["current_value"]
+            account["duration"] = "NA"
+            account["mature"] = True
+
     return accounts
 
 def delete_account(user_id, account_id):
