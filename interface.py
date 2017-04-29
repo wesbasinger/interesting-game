@@ -293,6 +293,13 @@ def get_accounts(user_id):
                 account["mature"] = False
                 account["current_value"] = "NA"
 
+        elif account["type"] == "horse racing":
+
+            account["current_value"] = calculate_compound_interest(account["amount"], account["rate"], hours)
+            account["maturation_value"] = account["current_value"]
+            account["duration"] = "NA"
+            account["mature"] = True
+
     return accounts
 
 
