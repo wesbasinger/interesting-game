@@ -153,3 +153,35 @@ def make_compound_deposit():
     result["amount"] = random.choice([100, 500, 1000, 2000, 5000, 10000])
 
     return result
+
+def make_horse_racing():
+
+    names = [
+        "Horse Racing",
+        "Ponzi Scheme",
+        "Bingo",
+        "Insider Trading",
+        "Trip to Vegas"
+    ]
+
+    result = {
+        "name" : random.choice(names)
+    }
+
+    rand = random.random()
+
+    if rand < 0.75:
+
+        result["rate"] = rand * 20
+
+    elif rand < 0.90:
+
+        result["rate"] = rand * 50
+
+    else:
+
+        result["rate"] = rand * 100
+
+    result["risk"] = 0.90
+
+    return result

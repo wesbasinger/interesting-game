@@ -28,7 +28,7 @@
           <p>Type: Mutual Fund</p>
           <p>Manager: {{mutual_fund["name"]}}</p>
           <p>Index: {{mutual_fund["price"]}}</p>
-          <p>Risk: Very High </p>
+          <p>Risk: Low </p>
           <p>Minimum: None</p>
           <p>Duration: Not Fixed</p>
           <input type="number" required="true" placeholder="Amount to buy shares"/>
@@ -68,6 +68,18 @@
           <p>Risk: Very Low </p>
           <p>Amount: {{compound_deposit["amount"]}}</p>
           <p>Duration: {{compound_deposit["duration"]}} years</p>
+          <input type="submit" value="Submit">
+        </form>
+      </td>
+      <td>
+        <form action="/horse_racing?name={{horse_racing['name']}}&rate={{horse_racing['rate']}}&risk={{horse_racing['risk']}}" method="POST">
+          <p>Type: Illicit</p>
+          <p>Activity: {{horse_racing["name"]}}</p>
+          <p>Rate: {{horse_racing["rate"]}}</p>
+          <p>Risk: Very High </p>
+          <p>Minimum: None</p>
+          <p>Duration: Not Fixed</p>
+          <input type="number" required="true" placeholder="Amount to gamble away"/>
           <input type="submit" value="Submit">
         </form>
       </td>

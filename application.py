@@ -41,7 +41,8 @@ def index():
                       mutual_fund = seed.make_mutual_fund(),
                       money_market = seed.make_money_market(),
                       bond = seed.make_bond(),
-                      compound_deposit = seed.make_compound_deposit())
+                      compound_deposit = seed.make_compound_deposit(),
+                      horse_racing = seed.make_horse_racing())
 
 
 @app.route("/login", methods=["GET", "POST"])
