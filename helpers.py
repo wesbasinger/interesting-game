@@ -3,6 +3,8 @@ from functools import wraps
 
 from yahoo_finance import Share
 
+import datetime
+
 def login_required(f):
     """
     Decorate routes to require login.
@@ -25,3 +27,17 @@ def get_stock_index():
     yahoo = Share("^GSPC")
 
     return float(yahoo.get_price())
+
+def calculate_compound_interest(principal, rate, time):
+
+    return principal * (1 + rate / 100.00) ** time
+
+def elapsed_hours(first_timestamp, second_timestamp):
+
+    first_timestamp = datetime.datetime.strptime(first_timestamp, '%Y-%m-%d %H:%M:%S')
+
+    second_timestamp = datetime.datetime.strptime(second_timestamp, '%Y-%m-%d %H:%M:%S')
+
+    td = second_timestamp - first_timestamp
+
+    return td.seconds / 3600
