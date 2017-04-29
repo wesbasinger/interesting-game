@@ -11,6 +11,11 @@ import datetime
 
 from helpers import *
 
+INSUFFICIENT_FUNDS = {
+    "error" : True, "message" :
+    "You do not have sufficient funds."
+}
+
 client = MongoClient(mongo_uri)
 
 db = client['interesting']
@@ -82,7 +87,7 @@ def create_savings(user_id, bank, rate, amount):
 
     if amount > get_cash(user_id):
 
-        return {"error" : True, "message" : "insufficient funds"}
+        return INSUFFICIENT_FUNDS
 
     else:
 
@@ -123,7 +128,7 @@ def create_money_market(user_id, bank, rate, amount, risk):
 
     if amount > get_cash(user_id):
 
-        return {"error" : True, "message" : "insufficient funds"}
+        return INSUFFICIENT_FUNDS
 
     else:
 
@@ -164,7 +169,7 @@ def create_bond(user_id, name, rate, risk, amount, duration):
 
     if amount > get_cash(user_id):
 
-        return {"error" : True, "message" : "insufficient funds"}
+        return
 
     else:
 
@@ -206,7 +211,7 @@ def create_compound_deposit(user_id, name, rate, amount, duration):
 
     if amount > get_cash(user_id):
 
-        return {"error" : True, "message" : "insufficient funds"}
+        return INSUFFICIENT_FUNDS
 
     else:
 
@@ -307,7 +312,7 @@ def create_horse_racing(user_id, name, rate, risk, amount):
 
     if amount > get_cash(user_id):
 
-        return {"error" : True, "message" : "insufficient funds"}
+        return INSUFFICIENT_FUNDS
 
     account = {
 
@@ -383,7 +388,7 @@ def create_mutual_fund(user_id, name, price, shares):
 
     if price * shares > get_cash(user_id):
 
-        return {"error" : True, "message" : "insufficient funds"}
+        return INSUFFICIENT_FUNDS
 
     account = {
 

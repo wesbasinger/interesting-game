@@ -6,10 +6,13 @@
 
 {% block main %}
 
+<div class="jumbotron">
+
   <h2>Error</h2>
 
-  <p>{{message}}</p>
+  <p class="lead">{{message}}</p>
 
   <a href="{{url_for("index")}}" class="btn btn-info" role="button">Return to Home Page</a>
+</div>
 
 {% endblock %}
