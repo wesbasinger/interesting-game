@@ -4,6 +4,8 @@ from oauth2client import client, crypt
 from tempfile import gettempdir
 from datetime import datetime
 
+import seed
+
 from helpers import *
 
 CLIENT_ID = "1024412823571-9489vhkoanksm77ntqsste037572j8o2.apps.googleusercontent.com"
@@ -34,9 +36,8 @@ Session(app)
 @login_required
 def index():
 
-    print(session)
-
-    return render_template('index.html')
+    return render_template(
+        'index.html', savings = seed.make_savings())
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -64,8 +65,6 @@ def login():
 
             return "error"
 
-        #userid = idinfo['sub']
-
         # remember which user has logged in
         session["user_id"] = idinfo["sub"]
         session["email"] = idinfo["email"]
@@ -73,8 +72,6 @@ def login():
         session["picture"] = idinfo["picture"]
 
         return redirect(url_for("index"))
-
-
 
     return render_template("login.html")
 
