@@ -66,6 +66,8 @@
                                 <li><a href="#">How to Get Started</a></li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
+                                <li>{{ session["name"] }}</li>
+                                <li><img src="{{ session['picture']}}" height="40px"/>
                                 <li><button onclick="signOut();">Sign out</button></li>
                             </ul>
                             <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>

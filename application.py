@@ -68,8 +68,9 @@ def login():
 
         # remember which user has logged in
         session["user_id"] = idinfo["sub"]
-
-        print(idinfo)
+        session["email"] = idinfo["email"]
+        session["name"] = idinfo["name"]
+        session["picture"] = idinfo["picture"]
 
         return redirect(url_for("index"))
 
