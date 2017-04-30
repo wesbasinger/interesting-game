@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Leaderboard
+{% endblock %}
+
+{% block main %}
+  <div class="jumbotron">
+  <h1>Leaderboard</h1>
+</div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <td>Name</td>
+        <td>Picture</td>
+        <td>Valuation</td>
+      <tr>
+    </thead>
+    <tbody>
+      {% for value in valuations %}
+        <tr>
+          <td>{{value["name"]}}</td>
+          <td><img src="{{value["picture"]}}" height="40px"/></td>
+          <td>{{value["value"] | usd }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

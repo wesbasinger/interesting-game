@@ -51,3 +51,15 @@ def elapsed_hours(previous_timestamp):
     td = now - previous
 
     return td.total_seconds() / 3600
+
+def is_mature(timestamp, duration):
+
+    hours = elapsed_hours(timestamp)
+
+    if hours >= duration:
+
+        return True
+
+    else:
+
+        return False

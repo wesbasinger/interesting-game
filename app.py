@@ -267,6 +267,14 @@ def login():
 
     return render_template("login.html")
 
+@app.route("/leaderboard")
+@login_required
+def leaderboard():
+
+    valuations = interface.make_valuations()
+
+    return render_template("leaderboard.html", valuations=valuations)
+
 
 @app.route("/logout")
 def logout():

@@ -424,3 +424,81 @@ def create_mutual_fund(user_id, name, price, shares):
             }
         }
     )
+
+def get_aggregate_accounts():
+
+    results = users.aggregate(
+        [
+            {"$unwind" : "$accounts"},
+            {
+                "$project" :
+                    {
+                        "_id" : 0,
+                        "cash" : 1,
+                        "name" : 1,
+                        "picture" : 1,
+                        "user_id" : 1,
+                        "amount" : "$accounts.amount",
+                        "rate" : "$accounts.rate",
+                        "deposit_time" : "$accounts.deposit_time",
+                        "risk" : "$accounts.risk",
+                        "duration" : "$accounts.duration"
+                    }
+                },
+                {
+                    "$match" : {
+                        "$or" :[
+                        {"risk": {"$lt": 0.50}},
+                        {"risk": {"$exists": "false"}}]
+                            }
+                }
+        ]
+    )
+
+def make_valuations():
+
+    _users = users.find()
+
+    results = []
+
+    for user in _users:
+
+        result =  {
+            "name" : user["name"],
+            "picture" : user["picture"],
+            "value" : user["cash"]
+        }
+
+        for account in user["accounts"]:
+
+            hours = elapsed_hours(account["deposit_time"])
+
+            if account["type"] == "money market" and account["risk"] < 0.50:
+
+                result["value"] += calculate_compound_interest(account["amount"], account["rate"], hours)
+
+            elif account["type"] == "mutual fund":
+
+                result["value"] += account["amount"] * get_stock_index()
+
+            elif account["type"] == "compound deposit" and is_mature(account["deposit_time"], account["duration"]):
+
+                result["value"] += calculate_compound_interest(account["amount"], account["rate"], account["duration"])
+
+            elif account["type"] == "government bond" and is_mature(account["deposit_time"], account["duration"]) and account["risk"] < 0.50:
+
+                result["value"] += calculate_compound_interest(account["amount"], account["rate"], account["duration"])
+
+            elif account["type"] == "savings":
+
+                result["value"] += calculate_compound_interest(account["amount"], account["rate"], hours)
+
+            elif account["type"] == "horse racing" and account["risk"] < 0.50:
+
+                result["value"] += calculate_compound_interest(account["amount"], account["rate"], hours)
+
+        results.append(result)
+
+    newlist = sorted(results, key=lambda k: k['value'], reverse=True)
+
+    return newlist
