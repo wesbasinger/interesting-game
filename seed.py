@@ -8,8 +8,9 @@ def make_savings():
         "Dangwood National Bank",
         "Sheridan Savings",
         "Seymour Feet Bank & Loan",
-        "IP Freely Credit Union",
-        "Ball State Tower"
+        "I.P. Freely Credit Union",
+        "Ball State Tower",
+        "Musty Buttes Savings"
     ]
 
     result = {
@@ -20,15 +21,15 @@ def make_savings():
 
     if rand < 0.75:
 
-        result["rate"] = rand * 0.30
+        result["rate"] = rand * 0.10
 
     elif rand < 0.90:
 
-        result["rate"] = rand * 0.75
+        result["rate"] = rand * 0.55
 
     else:
 
-        result["rate"] = rand
+        result["rate"] = rand * 0.75
 
     return result
 
@@ -40,7 +41,15 @@ def make_mutual_fund():
         "Fidelity",
         "Continental",
         "Jim Rivers",
-        "Hank Williams"
+        "Hank Williams",
+        "Johnny Cash",
+        "Merle Haggard",
+        "Karen Farmer",
+        "Holly Pidanie",
+        "Titus Delly O Jay",
+        "Crafty Cats",
+        "Seth Lee John",
+        "King Arthur"
     ]
 
     result = {
@@ -58,7 +67,8 @@ def make_money_market():
         "Pancho Villa Loan Institution",
         "Corleone Credit Union",
         "Goodfellas",
-        "Bonnie and Clyde Central Trust"
+        "Bonnie and Clyde Central Trust",
+        "Al Capone National Trust"
     ]
 
     result = {
@@ -69,15 +79,15 @@ def make_money_market():
 
     if rand < 0.75:
 
-        result["rate"] = rand * 1.5
+        result["rate"] = rand * 0.75
 
     elif rand < 0.90:
 
-        result["rate"] = rand * 2
+        result["rate"] = rand
 
     else:
 
-        result["rate"] = rand * 2.5
+        result["rate"] = rand * 1.5
 
     result["risk"] = rand * rand * rand * rand
 
@@ -86,11 +96,14 @@ def make_money_market():
 def make_bond():
 
     names = [
-        "Kingdom of Asgaurd",
+        "Kingdom of Asgard",
         "City of Amityville",
-        "Transvania",
+        "Transylvania",
         "Neverland",
-        "Middle Earth"
+        "Middle Earth",
+        "Alderaan",
+        "Snowdonia",
+        "North Korea"
     ]
 
     result = {
@@ -127,7 +140,9 @@ def make_compound_deposit():
         "Fidelity",
         "Continental",
         "Jim Rivers",
-        "Hank Williams"
+        "Hank Williams",
+        "Garth Brooks",
+        "Johnny Cash"
     ]
 
     result = {
@@ -161,7 +176,9 @@ def make_horse_racing():
         "Ponzi Scheme",
         "Bingo",
         "Insider Trading",
-        "Trip to Vegas"
+        "Trip to Vegas",
+        "Village Tech Building Bond",
+        "Trump Real Estate"
     ]
 
     result = {
