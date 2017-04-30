@@ -1,3 +1,6 @@
 Flask
 Flask-Session
 oauth2client
+yahoo-finance
+pymongo
+gunicorn
