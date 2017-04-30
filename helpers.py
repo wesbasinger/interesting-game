@@ -4,7 +4,6 @@ from functools import wraps
 from yahoo_finance import Share
 
 import datetime
-import dateutil
 
 def login_required(f):
     """
