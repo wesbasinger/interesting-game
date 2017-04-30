@@ -169,7 +169,7 @@ def create_bond(user_id, name, rate, risk, amount, duration):
 
     if amount > get_cash(user_id):
 
-        return
+        return INSUFFICIENT_FUNDS
 
     else:
 
