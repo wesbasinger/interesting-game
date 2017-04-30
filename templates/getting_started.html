@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Getting Started
+{% endblock %}
+
+{% block main %}
+  <div class="jumbotron">
+    <h1>Getting Started</h1>
+  </div>
+
+  <div class="well">
+    <h2> Beginning Balance</h2>
+    <p class="lead">
+      You begin the game with $10,000.  The goal is to accrue as much money as
+      possible.  There is no way to add additional cash, you must make your
+      fortune from interest and the like.
+    </p>
+  </div>
+  <div class="well">
+    <h2> Different Account Types</h2>
+    <ul>
+      <li>
+        <h3>Savings Account</h3>
+        <p>This is a very safe option.  There is no risk of losing your
+           investment and it does pay an interest rate.  You can liquidate
+          this type of account at any time.
+        </p>
+      </li>
+      <li>
+        <h3>Mutual Fund</h3>
+        <p>
+          This account does not pay interest.  Instead, your returns are based
+          on the NASDAQ stock index.  You must make a fairly large investment to
+          purchase one share, but there is more potential for returns.  The idea
+          is to buy low and sell high.  However, there is some risk associated
+          with this type of account.
+        </p>
+      </li>
+      <li>
+        <h3>Money Market</h3>
+        <p>
+          This account pays higher interest than a savings account, but there is
+          a slight possibility that the account could crash and you would lose
+          your investment.  There is a minimum investment in this type of account.
+        </p>
+      </li>
+      <li>
+        <h3>Government Bond</h3>
+        <p>
+          This investment pays a nice interest rate, but requires that you leave
+          the money in the account for some predecided duration of time.  You cannot
+          liquidate the account until the fund matures.  There is also some risk associated
+          with this type of account.
+        </p>
+      </li>
+      <li>
+        <h3>Compound Deposit</h3>
+        <p>
+          This is a lot like a goverment bond, except with a much safer interest rate.
+          You must leave the money in the fund until it matures.  There is no chance
+          of losing money in this investment.
+        </p>
+      </li>
+      <li>
+        <h3>Horse Racing</h3>
+        <p>
+          To add an element of fun, I have included a group of illicit investments.
+          The returns are ridiculously high, but don't expect to get your money back
+          a majority of the time!  There's a price to pay for crime :-)
+        </p>
+      </li>
+
+    </ul>
+
+  <p>Feel free to email wbasinger@villagetechschools.org with any questions or critique.</p>
+
+  <a href="{{url_for("index")}}">Back Home</a>
+  </div>
+
+
+{% endblock %}
