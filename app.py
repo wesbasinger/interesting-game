@@ -261,7 +261,7 @@ def login():
         session["name"] = idinfo["name"]
         session["picture"] = idinfo["picture"]
 
-        interface.initialize_user(session["user_id"])
+        interface.initialize_user(session["user_id"], session["name"], session["picture"])
 
         return redirect(url_for("index"))
 

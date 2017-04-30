@@ -34,7 +34,7 @@ def get_user(user_id):
 
         return user
 
-def initialize_user(user_id):
+def initialize_user(user_id, name, picture):
 
     user = get_user(user_id)
 
@@ -42,6 +42,8 @@ def initialize_user(user_id):
 
         new_user = {
             "user_id" : user_id,
+            "name" : name,
+            "picture" : picture,
             "cash" : 10000,
             "accounts" : [],
             "transactions" : [
