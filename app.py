@@ -211,7 +211,7 @@ def manage():
         mature = request.args.get("mature")
         risk = float(request.args.get("risk"))
 
-        if risk > 0.5:
+        if risk > 0.70:
 
             interface.delete_account(session["user_id"], account_id)
 

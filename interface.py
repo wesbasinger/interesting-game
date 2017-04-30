@@ -448,7 +448,7 @@ def get_aggregate_accounts():
                 {
                     "$match" : {
                         "$or" :[
-                        {"risk": {"$lt": 0.50}},
+                        {"risk": {"$lt": 0.70}},
                         {"risk": {"$exists": "false"}}]
                             }
                 }
@@ -473,7 +473,7 @@ def make_valuations():
 
             hours = elapsed_hours(account["deposit_time"])
 
-            if account["type"] == "money market" and account["risk"] < 0.50:
+            if account["type"] == "money market" and account["risk"] < 0.70:
 
                 result["value"] += calculate_compound_interest(account["amount"], account["rate"], hours)
 
@@ -485,7 +485,7 @@ def make_valuations():
 
                 result["value"] += calculate_compound_interest(account["amount"], account["rate"], account["duration"])
 
-            elif account["type"] == "government bond" and is_mature(account["deposit_time"], account["duration"]) and account["risk"] < 0.50:
+            elif account["type"] == "government bond" and is_mature(account["deposit_time"], account["duration"]) and account["risk"] < 0.70:
 
                 result["value"] += calculate_compound_interest(account["amount"], account["rate"], account["duration"])
 
