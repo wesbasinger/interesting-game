@@ -207,7 +207,13 @@ def manage():
     else:
 
         account_id = request.args.get("account_id")
-        maturation_value = float(request.args.get("maturation_value"))
+        try:
+            maturation_value = float(request.args.get("maturation_value"))
+
+        except ValueError:
+
+            maturation_value = float(9999999999999)
+            
         mature = request.args.get("mature")
         risk = float(request.args.get("risk"))
 
