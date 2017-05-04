@@ -3,6 +3,7 @@ from flask_session import Session
 from oauth2client import client, crypt
 from tempfile import gettempdir
 from datetime import datetime
+import random
 
 import seed
 import interface
@@ -69,6 +70,10 @@ def savings():
     rate = float(request.args.get("rate"))
     amount = float(request.form.get("amount"))
 
+    if amount < 0:
+
+        return render_template("error.html", message="You cannot enter a negative amount.")
+
     result = interface.create_savings(session["user_id"], name, rate, amount)
 
     try:
@@ -88,6 +93,10 @@ def mutual_fund():
     name = request.args.get("name")
     price = float(request.args.get("price"))
     shares = int(request.form.get("shares"))
+
+    if shares < 0:
+
+        return render_template("error.html", message="You cannot enter a negative amount.")
 
     result = interface.create_mutual_fund(session["user_id"], name, price, shares)
 
@@ -153,6 +162,10 @@ def horse_racing():
     risk = float(request.args.get("risk"))
     amount = float(request.form.get("amount"))
 
+    if amount < 0:
+
+        return render_template("error.html", message="You cannot enter a negative amount.")
+
     result = interface.create_horse_racing(session["user_id"], name, rate, risk, amount)
 
     print result
@@ -207,17 +220,13 @@ def manage():
     else:
 
         account_id = request.args.get("account_id")
-        try:
-            maturation_value = float(request.args.get("maturation_value"))
 
-        except ValueError:
+        maturation_value = float(request.args.get("maturation_value"))
 
-            maturation_value = float(9999999999999)
-            
         mature = request.args.get("mature")
         risk = float(request.args.get("risk"))
 
-        if risk > 0.70:
+        if risk > random.random():
 
             interface.delete_account(session["user_id"], account_id)
 

@@ -17,19 +17,9 @@ def make_savings():
         "name" : random.choice(names)
     }
 
-    rand = random.random()
+    rand = random.randint(5, 20) * 0.01
 
-    if rand < 0.75:
-
-        result["rate"] = rand * 0.10
-
-    elif rand < 0.90:
-
-        result["rate"] = rand * 0.55
-
-    else:
-
-        result["rate"] = rand * 0.75
+    result["rate"] = rand
 
     return result
 
@@ -75,21 +65,13 @@ def make_money_market():
         "name" : random.choice(names)
     }
 
-    rand = random.random()
+    rand = random.randint(1, 5)
 
-    if rand < 0.75:
+    result["rate"] = rand
 
-        result["rate"] = rand * 0.75
+    risk = random.randint(1, 10) * 0.01
 
-    elif rand < 0.90:
-
-        result["rate"] = rand
-
-    else:
-
-        result["rate"] = rand * 1.5
-
-    result["risk"] = rand * rand * rand * rand
+    result["risk"] = risk
 
     return result
 
@@ -149,21 +131,11 @@ def make_compound_deposit():
         "name" : random.choice(names)
     }
 
-    rand = random.random()
+    rand = random.randint(1, 5)
 
-    if rand < 0.75:
+    result["rate"] = rand
 
-        result["rate"] = rand
-
-    elif rand < 0.90:
-
-        result["rate"] = rand * 1.25
-
-    else:
-
-        result["rate"] = rand * 1.5
-
-    result["duration"] = random.choice([5, 10, 15, 20, 50, 100])
+    result["duration"] = random.choice([5, 10, 15, 20, 50])
 
     result["amount"] = random.choice([100, 500, 1000, 2000, 5000, 10000])
 
@@ -185,20 +157,10 @@ def make_horse_racing():
         "name" : random.choice(names)
     }
 
-    rand = random.random()
+    rate = random.randint(10, 50)
 
-    if rand < 0.75:
+    result["rate"] = rate
 
-        result["rate"] = rand * 20
-
-    elif rand < 0.90:
-
-        result["rate"] = rand * 50
-
-    else:
-
-        result["rate"] = rand * 100
-
-    result["risk"] = rand * .9
+    result["risk"] = random.randint(90, 100) * 0.01
 
     return result
