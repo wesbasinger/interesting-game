@@ -74,6 +74,10 @@ def savings():
 
         return render_template("error.html", message="You cannot enter a negative amount.")
 
+	if rate > 2:
+
+		return render_template("error.html", message="You have tampered with the rate, authorities have been contacted.")
+
     result = interface.create_savings(session["user_id"], name, rate, amount)
 
     try:
@@ -143,6 +147,10 @@ def compound_deposit():
 
     result = interface.create_compound_deposit(session["user_id"], name, rate, amount, duration)
 
+	if rate > 5:
+
+		return render_template("error.html", message="You have tampered with the rate, authorities have been contacted.")
+
     try:
 
         message = result["message"]
@@ -165,6 +173,10 @@ def horse_racing():
     if amount < 0:
 
         return render_template("error.html", message="You cannot enter a negative amount.")
+
+	if rate > 50:
+
+		return render_template("error.html", message="You cannot tamper with the rate, authorities have been contacted.")
 
     result = interface.create_horse_racing(session["user_id"], name, rate, risk, amount)
 
@@ -194,6 +206,10 @@ def money_market():
     if amount < 2000:
 
         return render_template("error.html", message="Minimum investment is $2000.")
+
+	if rate > 5:
+
+		return render_template("error.html", message="You have tampered with the rate, authorities have been contacted.")
 
     result = interface.create_money_market(session["user_id"], name, rate, amount, risk)
 
